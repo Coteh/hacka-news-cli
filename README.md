@@ -1,6 +1,9 @@
-# hacka-news
+# hacka-news-cli
 -----------------
 A command line interface (CLI) for [Hacker News](https://news.ycombinator.com/) that utilizes [their official API](https://github.com/HackerNews/API) and node.js.
+
+### Update (April 13, 2016)
+The portion of the app that directly interfaces with the API has recently been split off into its own module. You can check it out [here](https://github.com/Coteh/hacka-news).
 
 ## Features
 - Print out stories from HN feeds (top, new, ask, show, and job)
