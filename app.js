@@ -1,4 +1,4 @@
-var hackaNews = require('./src/hacka-news');
+var hackaNews = require('hacka-news');
 var cliDisplay = require('./src/cli-display');
 var hackaFavs = require('./src/hacka-favs');
 var cliProcessor = require('commander');
