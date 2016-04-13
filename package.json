@@ -5,7 +5,8 @@
   "main": "app.js",
   "preferGlobal": "true",
   "bin" : {
-    "hacka-news" : "./bin/index.js"
+    "hacka-news" : "./bin/index.js",
+    "hn" : "./bin/index.js"
   },
   "dependencies": {
     "hacka-news": "^1.1.0",
