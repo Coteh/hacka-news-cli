@@ -14,7 +14,11 @@ The portion of the app that directly interfaces with the API has recently been s
   - Print out list of stories that have been favourited
 
 ## Installation
-Run *git clone hacka-news* to clone this repository, then run *npm install* to install all the dependencies.
+Clone the repository with:  
+`git clone https://github.com/Coteh/hacka-news-cli`
+
+Then to install all the dependencies, run:  
+`npm install`
 
 ## Issues
 - Error comments are unorganized
