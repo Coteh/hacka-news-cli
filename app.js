@@ -21,7 +21,7 @@ var printFavourites = function(flags){
 };
 
 var printFeed = function(storyType, flags){
-    hackaNews.requestFeedStoryIDs(storyType, function(ids){
+    hackaNews.requestFeedStoryIDs(storyType, 10, function(ids){
         if (ids == null){
             console.log("ERROR: Stories from " + storyType + " could not load.");
             return;
@@ -29,8 +29,7 @@ var printFeed = function(storyType, flags){
             console.log("ERROR: " + ids.error + ".");
             return;
         }
-        var prunedIDs = ids.slice(0, hackaNews.getAmountOfFeedStories());
-        hackaNews.requestGroup(prunedIDs, function(loadedContents){
+        hackaNews.requestGroup(ids, function(loadedContents){
             for (var i = 0; i < loadedContents.length; i++){
                 if (loadedContents[i] == null){
                     console.log("ERROR: Story couldn't load.");
