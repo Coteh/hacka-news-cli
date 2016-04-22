@@ -1,4 +1,5 @@
 var colors = require('colors/safe');
+var hackaTime = require('hacka-news').time;
 
 exports.NOFAVS_MESSAGE = "No favourites.";
 
@@ -20,6 +21,7 @@ exports.displayContent = function(hnNode, flags){
             console.log("By: " + hnNode.by);
             console.log(hnNode.url);
             console.log(hnNode.commentsUrl);
+            console.log(hackaTime.getTimeStringFromEpoch(hnNode.time));
             console.log(hnNode.score + " points | " + hnNode.descendants + " comments");
             if (flags.verbose) console.log("ID: " + hnNode.id);
             console.log("----------------------");
@@ -35,6 +37,7 @@ exports.displayContent = function(hnNode, flags){
             console.log("\t" + "By: " + hnNode.rootParent.by);
             console.log("\t" + hnNode.rootParent.url);
             console.log("\t" + hnNode.rootParent.commentsUrl);
+            console.log(hackaTime.getTimeStringFromEpoch(hnNode.time));
             console.log("\t" + hnNode.rootParent.score + " points | " + hnNode.rootParent.descendants + " comments");
             console.log("----------------------");
         }else{
@@ -46,6 +49,7 @@ exports.displayContent = function(hnNode, flags){
             console.log("----------------------");
             console.log("Job: " + colors.yellow(hnNode.title));
             console.log(hnNode.commentsUrl);
+            console.log(hackaTime.getTimeStringFromEpoch(hnNode.time));
             if (flags.verbose){
                 console.log("ID: " + hnNode.id);
             }
@@ -62,6 +66,7 @@ exports.displayContent = function(hnNode, flags){
                 console.log("- " + ((hnNode.partNodes[i] != null) ? hnNode.partNodes[i].text : "Null poll option"));
             }
             console.log(hnNode.commentsUrl);
+            console.log(hackaTime.getTimeStringFromEpoch(hnNode.time));
             if (flags.verbose){
                 console.log("ID: " + hnNode.id);
                 console.log("Pollopt IDS: " + hnNode.parts);
