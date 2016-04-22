@@ -3,6 +3,8 @@ var cliDisplay = require('./src/cli-display');
 var hackaFavs = require('./src/hacka-favs');
 var cliProcessor = require('commander');
 
+const DEFAULT_STORY_LIMIT = 10;
+
 var printFavourites = function(flags){
     var savedIDs = hackaFavs.getSavedIDs();
     if (savedIDs.length == 0){
@@ -20,8 +22,11 @@ var printFavourites = function(flags){
     });
 };
 
-var printFeed = function(storyType, flags){
-    hackaNews.requestFeedStoryIDs(storyType, function(ids){
+var printFeed = function(storyType, limit, flags){
+    if (typeof(limit) === "undefined"){
+        limit = DEFAULT_STORY_LIMIT;
+    }
+    hackaNews.requestFeedStoryIDs(storyType, limit, function(ids){
         if (ids == null){
             console.log("ERROR: Stories from " + storyType + " could not load.");
             return;
@@ -29,8 +34,7 @@ var printFeed = function(storyType, flags){
             console.log("ERROR: " + ids.error + ".");
             return;
         }
-        var prunedIDs = ids.slice(0, hackaNews.getAmountOfFeedStories());
-        hackaNews.requestGroup(prunedIDs, function(loadedContents){
+        hackaNews.requestGroup(ids, function(loadedContents){
             for (var i = 0; i < loadedContents.length; i++){
                 if (loadedContents[i] == null){
                     console.log("ERROR: Story couldn't load.");
@@ -61,19 +65,19 @@ cliProcessor
             hackaFavs.openSavedPostsJSON();
             printFavourites(options);
         }else if (cmd == "top"){
-            printFeed("top", options);
+            printFeed("top", arguments[0], options);
             return;
         }else if (cmd == "new"){
-            printFeed("new", options);
+            printFeed("new", arguments[0], options);
             return;
         }else if (cmd == "ask"){
-            printFeed("ask", options);
+            printFeed("ask", arguments[0], options);
             return;
         }else if (cmd == "show"){
-            printFeed("show", options);
+            printFeed("show", arguments[0], options);
             return;
         }else if (cmd == "jobs"){
-            printFeed("job", options);
+            printFeed("job", arguments[0], options);
             return;
         }else if (cmd == "url"){
             if (arguments.length < 1){
@@ -203,11 +207,11 @@ cliProcessor
     .on('--help', function(){
         console.log("  Commands:");
         console.log('');
-        console.log("   top\t\t\tDisplays top stories.");
-        console.log("   new\t\t\tDisplays new stories.");
-        console.log("   ask\t\t\tDisplays Ask HN stories.");
-        console.log("   show\t\t\tDisplays Show HN stories.");
-        console.log("   jobs\t\t\tDisplays job stories.");
+        console.log("   top [limit]\t\tDisplays top stories.");
+        console.log("   new [limit]\t\tDisplays new stories.");
+        console.log("   ask [limit]\t\tDisplays Ask HN stories.");
+        console.log("   show [limit]\t\tDisplays Show HN stories.");
+        console.log("   jobs [limit]\t\tDisplays job stories.");
         console.log("   favs\t\t\tDisplays stories saved in favourites.");
         console.log("   url [fav_index]\tPrints HN url of a post of fav_index index in favourites.");
         console.log("   idurl [id]\t\tPrints HN url of a post of HN id.");
