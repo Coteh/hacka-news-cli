@@ -35,6 +35,21 @@ var writeJSON = function(serialized, callback){
     });
 };
 
+var removeInvalidSaved = function(ids){
+    var foundSomething = false;
+    for (var i = 0; i < ids.length; i++){
+        if ((typeof(ids[i]) !== "number") || ids[i] < 0){
+            ids.splice(i, 1);
+            foundSomething = true;
+        }
+    }
+    if (foundSomething){
+        jsonObject.ids = ids;
+        var jsonSerialized = JSON.stringify(jsonObject);
+        writeJSON(jsonSerialized, null);
+    }
+}
+
 var openSavedPostsJSON = function(){
     var data = null;
     try{
@@ -48,11 +63,16 @@ var openSavedPostsJSON = function(){
     }
     jsonObject = JSON.parse(data);
     if (jsonObject.ids != null){
+        removeInvalidSaved(jsonObject.ids);
         setSavedPostIDS(jsonObject.ids);
     }
 };
 
 var savePostID = function(postID){
+    if (isNaN(postID)){
+        console.log("Post ID is not a number.");
+        return;
+    }
     openSavedPostsJSON();
     savedIDs.push(postID);
     jsonObject.ids = savedIDs;
@@ -63,6 +83,10 @@ var savePostID = function(postID){
 };
 
 var unsavePostID = function(postID){
+    if (isNaN(postID)){
+        console.log("Post ID is not a number.");
+        return;
+    }
     openSavedPostsJSON();
     var index = savedIDs.indexOf(postID);
     if (index <= -1){
