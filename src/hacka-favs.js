@@ -53,6 +53,10 @@ var openSavedPostsJSON = function(){
 };
 
 var savePostID = function(postID){
+    if (isNaN(postID)){
+        console.log("Post ID is not a number.");
+        return;
+    }
     openSavedPostsJSON();
     savedIDs.push(postID);
     jsonObject.ids = savedIDs;
@@ -63,6 +67,10 @@ var savePostID = function(postID){
 };
 
 var unsavePostID = function(postID){
+    if (isNaN(postID)){
+        console.log("Post ID is not a number.");
+        return;
+    }
     openSavedPostsJSON();
     var index = savedIDs.indexOf(postID);
     if (index <= -1){
