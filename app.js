@@ -142,7 +142,7 @@ cliProcessor
             }
             return;
         }else if (cmd == "save"){
-            hackaFavs.savePostID(parseInt(arguments[0]));
+            hackaFavs.savePost(arguments[0]);
         }else if (cmd == "unsave"){
             hackaFavs.unsavePostID(parseInt(arguments[0]));
         }else if (cmd == "topid"){
@@ -216,7 +216,7 @@ cliProcessor
         console.log("   url [fav_index]\tPrints HN url of a post of fav_index index in favourites.");
         console.log("   idurl [id]\t\tPrints HN url of a post of HN id.");
         console.log("   favid [fav_index]\tPrints HN url of a post of HN id.");
-        console.log("   save [id]\t\tSave HN post by id to favourites.");
+        console.log("   save [id/url]\t\tSave HN post by id or url to favourites.");
         console.log("   unsave [id]\t\tRemove HN post by id from favourites.");
         console.log("   topid [index]\tGrabs the id of the current n top post on HN, where n is the optional index argument.");
         console.log("   topurl [index]\tGrabs the url of the current n top post on HN, where n is the optional index argument.");
