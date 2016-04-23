@@ -23,7 +23,7 @@ var printFavourites = function(flags){
 };
 
 var printFeed = function(storyType, limit, flags){
-    if (typeof(limit) === "undefined"){
+    if (isNaN(limit)){
         limit = DEFAULT_STORY_LIMIT;
     }
     hackaNews.requestFeedStoryIDs(storyType, limit, function(ids){
