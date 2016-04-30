@@ -79,7 +79,7 @@ cliProcessor
         }else if (cmd == "jobs"){
             printFeed("job", arguments[0], options);
             return;
-        }else if (cmd == "url"){
+        }else if (cmd == "favurl"){
             if (arguments.length < 1){
                 console.log("expected: an index number of the favourite story to get the url of")
             } else {
@@ -215,9 +215,9 @@ cliProcessor
         console.log("   show [limit]\t\tDisplays Show HN stories.");
         console.log("   jobs [limit]\t\tDisplays job stories.");
         console.log("   favs\t\t\tDisplays stories saved in favourites.");
-        console.log("   url [fav_index]\tPrints HN url of a post of fav_index index in favourites.");
+        console.log("   favurl [fav_index]\tPrints HN url of a post of fav_index index in favourites.");
         console.log("   idurl [id]\t\tPrints HN url of a post of HN id.");
-        console.log("   favid [fav_index]\tPrints HN url of a post of HN id.");
+        console.log("   favid [fav_index]\tPrints the id of a post of fav_index index in favourites.");
         console.log("   save [id/url]\tSave HN post by id or url to favourites.");
         console.log("   unsave [id]\t\tRemove HN post by id from favourites.");
         console.log("   favpath\t\tPrints path to the file storing favourites.");
