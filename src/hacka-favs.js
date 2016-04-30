@@ -1,8 +1,11 @@
 var fs = require('fs');
 var os = require('os');
+var path = require("path");
 
-var HNSAVED_FILENAME = ".hnsaved";
+const HNSAVED_FILENAME = ".hnsaved";
+
 var savedIDs = [];
+var savedPath = path.normalize(os.homedir() + "/" + HNSAVED_FILENAME);
 
 var getSavedIDs = function(){
     return savedIDs;
@@ -17,6 +20,10 @@ var getSavedPostID = function(index){
     return savedIDs[index];
 };
 
+var getSavedLocation = function(){
+    return savedPath;
+}
+
 var setSavedPostIDS = function(savedList){
     for (var i = 0; i < savedList.length; i++){
         savedIDs.push(savedList[i]);
@@ -24,7 +31,7 @@ var setSavedPostIDS = function(savedList){
 };
 
 var writeJSON = function(serialized, callback){
-    fs.writeFile(os.homedir() + "/" + HNSAVED_FILENAME, serialized, function(err) {
+    fs.writeFile(savedPath, serialized, function(err) {
         if (err){
             console.log("ERROR: Could not save file.");
             return;
@@ -142,6 +149,7 @@ var savePost = function(postArgStr){
 module.exports = {
     getSavedIDs,
     getSavedPostID,
+    getSavedLocation,
     setSavedPostIDS,
     openSavedPostsJSON,
     savePostID,
