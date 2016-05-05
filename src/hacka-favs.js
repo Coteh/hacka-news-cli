@@ -6,6 +6,7 @@ const HNSAVED_FILENAME = ".hnsaved";
 
 var savedIDs = [];
 var savedPath = path.normalize(os.homedir() + "/" + HNSAVED_FILENAME);
+var jsonObject = {};
 
 var getSavedIDs = function(){
     return savedIDs;
