@@ -4,9 +4,9 @@
   "description": "Hacker News command line reader made with Javascript and node.js.",
   "main": "app.js",
   "preferGlobal": "true",
-  "bin" : {
-    "hacka-news" : "./bin/index.js",
-    "hn" : "./bin/index.js"
+  "bin": {
+    "hacka-news": "./bin/index.js",
+    "hn": "./bin/index.js"
   },
   "dependencies": {
     "hacka-news": "^1.1.0",
@@ -14,7 +14,7 @@
     "commander": "^2.9.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,10 @@
   },
   "homepage": "https://github.com/Coteh/hacka-news-cli#readme",
   "engines": {
-    "node" : ">=4.0.0"
+    "node": ">=4.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2",
+    "should": "^11.1.0"
   }
 }
