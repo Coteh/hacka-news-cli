@@ -62,7 +62,7 @@ cliProcessor
     .action(function(cmd, arguments, options){
         cmdGiven = cmd;
         if (cmd == "favs"){
-            hackaFavs.openSavedPostsJSON();
+            hackaFavs.openSavedPostsFile();
             printFavourites(options);
         }else if (cmd == "top"){
             printFeed("top", arguments[0], options);
@@ -83,7 +83,7 @@ cliProcessor
             if (arguments.length < 1){
                 console.log("expected: an index number of the favourite story to get the url of")
             } else {
-                hackaFavs.openSavedPostsJSON();
+                hackaFavs.openSavedPostsFile();
                 var indexOfStory = parseInt(arguments[0]);
                 try {
                     var hackaURL = hackaNews.getURL(hackaFavs.getSavedPostID(indexOfStory));
@@ -124,7 +124,7 @@ cliProcessor
             if (arguments.length < 1){
                 console.log("expected: an index number of the favourite story to get the id of")
             } else {
-                hackaFavs.openSavedPostsJSON();
+                hackaFavs.openSavedPostsFile();
                 var indexOfStory = parseInt(arguments[0]);
                 try {
                     var hackaID = hackaFavs.getSavedPostID(indexOfStory);
