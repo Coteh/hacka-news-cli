@@ -31,7 +31,7 @@ var setSavedPostIDS = function(savedList){
     }
 };
 
-var writeToFavourites = function(serialized, callback){
+var writeSavedPostsFile = function(serialized, callback){
     fs.writeFile(savedPath, serialized, function(err) {
         if (err){
             console.log("ERROR: Could not save file.");
@@ -44,7 +44,7 @@ var writeToFavourites = function(serialized, callback){
 };
 
 var resetFavourites = function(callback) {
-    writeToFavourites("{}", callback);
+    writeSavedPostsFile("{}", callback);
 }
 
 var removeInvalidSaved = function(ids){
@@ -58,7 +58,7 @@ var removeInvalidSaved = function(ids){
     if (foundSomething){
         jsonObject.ids = ids;
         var jsonSerialized = JSON.stringify(jsonObject);
-        writeToFavourites(jsonSerialized, null);
+        writeSavedPostsFile(jsonSerialized, null);
     }
 }
 
@@ -80,6 +80,17 @@ var openSavedPostsFile = function(){
     }
 };
 
+var writeFavourites = function(callback) {
+    var jsonObject = {};
+    jsonObject.ids = savedIDs;
+    var jsonSerialized = JSON.stringify(jsonObject);
+    writeSavedPostsFile(jsonSerialized, function(err){
+        if (callback != null){
+            callback(err);
+        }
+    });
+}
+
 var savePostID = function(postID){
     if (isNaN(postID)){
         console.log("Post ID is not a number.");
@@ -87,10 +98,12 @@ var savePostID = function(postID){
     }
     openSavedPostsFile();
     savedIDs.push(postID);
-    jsonObject.ids = savedIDs;
-    var jsonSerialized = JSON.stringify(jsonObject);
-    writeToFavourites(jsonSerialized, function(err){
-        console.log("Successfully added post of ID " + postID + " to favourites.");
+    writeFavourites(function(err){
+        if (err) {
+            console.log("There was an error adding post of ID " + postID + " to favourites.");
+        } else {
+            console.log("Successfully added post of ID " + postID + " to favourites.");
+        }
     });
 };
 
@@ -106,10 +119,12 @@ var unsavePostID = function(postID){
         return;
     }
     savedIDs.splice(index, 1);
-    jsonObject.ids = savedIDs;
-    var jsonSerialized = JSON.stringify(jsonObject);
-    writeToFavourites(jsonSerialized, function(err){
-        console.log("Successfully removed post of ID " + postID + " from favourites.");
+    writeFavourites(function(err){
+        if (err) {
+            console.log("There was an error removing post of ID " + postID + " from favourites.");
+        } else {
+            console.log("Successfully removed post of ID " + postID + " from favourites.");
+        }
     });
 };
 
@@ -158,6 +173,7 @@ module.exports = {
     setSavedPostIDS,
     resetFavourites,
     openSavedPostsFile,
+    writeFavourites,
     savePostID,
     unsavePostID,
     savePostURL,
