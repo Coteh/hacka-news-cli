@@ -39,13 +39,14 @@ var pathMock = {
 
 describe("hacka-favs", function(){
     before(function(){
+        mockery.enable(mockeryOptions);
         mockery.registerAllowables(["fs", "os", "path", "../src/hacka-favs"]);
     });
     describe("properties", function(){
         var testArr = [1, 2, 3, 4, 5, 6];
 
         before(function(){
-            mockery.enable(mockeryOptions);
+            mockery.resetCache();
             mockery.registerMock("os", osMock);
             mockery.registerMock("path", pathMock);
             hackaFavs = require("../src/hacka-favs");
@@ -63,12 +64,11 @@ describe("hacka-favs", function(){
         after(function(){
             mockery.deregisterMock("os");
             mockery.deregisterMock("path");
-            mockery.disable();
         });
     });
     describe("opening favourites file", function(){
         before(function(){
-            mockery.enable(mockeryOptions);
+            mockery.resetCache();
             mockery.registerMock("fs", fsMock);
             hackaFavs = require("../src/hacka-favs");
         });
@@ -78,14 +78,13 @@ describe("hacka-favs", function(){
         });
         after(function(){
             mockery.deregisterMock("fs");
-            mockery.disable();
         });
     });
     describe("writing to favourites file", function(){
         var testArr = [1, 2, 3, 4, 5, 6];
 
         before(function(){
-            mockery.enable(mockeryOptions);
+            mockery.resetCache();
             mockery.registerMock("fs", fsMock);
             hackaFavs = require("../src/hacka-favs");
         });
@@ -97,12 +96,11 @@ describe("hacka-favs", function(){
         });
         after(function(){
             mockery.deregisterMock("fs");
-            mockery.disable();
         });
     });
     describe("saving posts", function(){
         before(function(){
-            mockery.enable(mockeryOptions);
+            mockery.resetCache();
             mockery.registerMock("fs", fsSaveMock);
             hackaFavs = require("../src/hacka-favs");
         });
@@ -114,20 +112,48 @@ describe("hacka-favs", function(){
         });
         after(function(){
             mockery.deregisterMock("fs");
-            mockery.disable();
         });
     });
     describe("unsaving posts", function(){
-        it("should be able to unsave a post ID from favourites file.", function(){
-            should.fail();
+        var expectedArr = [1, 2, 3, 4, 6];
+        var expectedStr = "{\"ids\":[1,2,3,4,6]}";
+
+        before(function(){
+            mockery.resetCache();
+            mockery.registerMock("fs", fsMock);
+            hackaFavs = require("../src/hacka-favs");
+        });
+        it("should be able to unsave a post ID from favourites file and write the change to file.", function(){
+            hackaFavs.unsavePostID(5);
+            hackaFavs.getSavedIDs().should.deepEqual(expectedArr);
+            written.should.equal(expectedStr);
+            written = null;
+        });
+        after(function(){
+            mockery.deregisterMock("fs");
         });
     });
     describe("saving posts by url", function(){
+        var expectedArr = [1, 2, 3, 4, 5, 6, 12329089];
+        var expectedStr = "{\"ids\":[1,2,3,4,5,6,12329089]}";
+
+        before(function(){
+            mockery.resetCache();
+            mockery.registerMock("fs", fsMock);
+            hackaFavs = require("../src/hacka-favs");
+        });
         it("should take a Hacker News URL, extract the post ID from the URL, and save that to favourites", function(){
-            should.fail();
+            hackaFavs.savePostURL("https://news.ycombinator.com/item?id=12329089");
+            hackaFavs.getSavedIDs().should.deepEqual(expectedArr);
+            written.should.equal(expectedStr);
+            written = null;
+        });
+        after(function(){
+            mockery.deregisterMock("fs");
         });
     });
     after(function(){
         mockery.deregisterAllowables(["fs", "os", "path", "../src/hacka-favs"]);
+        mockery.disable();
     });
 });
