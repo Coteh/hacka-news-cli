@@ -1,6 +1,6 @@
 # hacka-news-cli
 
-[![Build Status](https://travis-ci.org/Coteh/hacka-news-cli.svg?branch=test%2Fharness)](https://travis-ci.org/Coteh/hacka-news-cli)
+[![Build Status](https://travis-ci.org/Coteh/hacka-news-cli.svg?branch=master)](https://travis-ci.org/Coteh/hacka-news-cli)
 
 A command line interface (CLI) for [Hacker News](https://news.ycombinator.com/) that utilizes [their official API](https://github.com/HackerNews/API) and node.js.
 
