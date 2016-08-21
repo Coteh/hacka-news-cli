@@ -24,7 +24,6 @@ Then to install all the dependencies, run:
 
 ## Issues
 - Error comments are unorganized
-- No unit/integration testing
 
 ## Future Additions
 - Filter feed results by tags or url

@@ -123,7 +123,7 @@ describe("hacka-favs", function(){
             mockery.registerMock("fs", fsMock);
             hackaFavs = require("../src/hacka-favs");
         });
-        it("should be able to unsave a post ID from favourites file and write the change to file.", function(){
+        it("should be able to unsave a post ID from favourites and write the change to file.", function(){
             hackaFavs.unsavePostID(5);
             hackaFavs.getSavedIDs().should.deepEqual(expectedArr);
             written.should.equal(expectedStr);
