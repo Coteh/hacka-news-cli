@@ -70,6 +70,9 @@ cliProcessor
         }else if (cmd == "new"){
             printFeed("new", arguments[0], options);
             return;
+        }else if (cmd == "best"){
+            printFeed("best", arguments[0], options);
+            return;
         }else if (cmd == "ask"){
             printFeed("ask", arguments[0], options);
             return;
@@ -211,6 +214,7 @@ cliProcessor
         console.log('');
         console.log("   top [limit]\t\tDisplays top stories.");
         console.log("   new [limit]\t\tDisplays new stories.");
+        console.log("   best [limit]\t\tDisplays best stories.");
         console.log("   ask [limit]\t\tDisplays Ask HN stories.");
         console.log("   show [limit]\t\tDisplays Show HN stories.");
         console.log("   jobs [limit]\t\tDisplays job stories.");
