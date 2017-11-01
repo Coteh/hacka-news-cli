@@ -4,12 +4,12 @@
   "description": "Hacker News command line reader made with Javascript and node.js.",
   "main": "app.js",
   "preferGlobal": "true",
-  "bin" : {
-    "hacka-news" : "./bin/index.js",
-    "hn" : "./bin/index.js"
+  "bin": {
+    "hacka-news": "./bin/index.js",
+    "hn": "./bin/index.js"
   },
   "dependencies": {
-    "hacka-news": "^1.1.0",
+    "hacka-news": "1.1.0",
     "colors": "^1.1.2",
     "commander": "^2.9.0"
   },
@@ -37,6 +37,6 @@
   },
   "homepage": "https://github.com/Coteh/hacka-news-cli#readme",
   "engines": {
-    "node" : ">=4.0.0"
+    "node": ">=4.0.0"
   }
 }
