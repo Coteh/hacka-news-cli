@@ -9,7 +9,7 @@
     "hn": "./bin/index.js"
   },
   "dependencies": {
-    "hacka-news": "^1.1.0",
+    "hacka-news": "1.1.0",
     "colors": "^1.1.2",
     "commander": "^2.9.0"
   },
